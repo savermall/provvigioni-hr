@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H&R · Area agenti</title>
+<style>
+:root{--g:#2E7D32;--g2:#43A047;--ink:#1c2b1e}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(160deg,#eef5ee,#dfe9df);min-height:100vh;color:var(--ink)}
+header{background:var(--g);color:#fff;padding:18px 22px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+header .logo{width:38px;height:38px;border-radius:10px;background:#fff;color:var(--g);display:grid;place-items:center;font-weight:800;font-size:15px}
+header h1{font-size:18px;margin:0;font-weight:700}
+header small{opacity:.85;font-weight:400}
+.wrap{max-width:760px;margin:34px auto;padding:0 16px}
+.card{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(20,50,20,.12);padding:26px;border:1px solid #e3ece3}
+h2{margin:0 0 4px;font-size:20px}.sub{color:#5b6b5d;font-size:14px;margin-bottom:18px}
+label{display:block;font-size:13px;font-weight:600;margin:12px 0 6px}
+input{width:100%;padding:12px 14px;border:1px solid #cfd9cf;border-radius:10px;font-size:15px;background:#fbfdfb}
+input:focus{outline:none;border-color:var(--g2);box-shadow:0 0 0 3px rgba(67,160,71,.15)}
+button{margin-top:18px;width:100%;padding:13px;border:0;border-radius:10px;background:var(--g);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+button:hover{background:var(--g2)}
+.err{color:#c62828;font-size:14px;margin-top:12px;min-height:18px}
+.big{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.big .lbl{font-size:13px;opacity:.9}.big .val{font-size:30px;font-weight:800}
+table{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #eef2ee}
+th{background:#f3f8f3;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#5b6b5d}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.chip{background:#eef5ee;border:1px solid #d8e6d8;border-radius:999px;padding:4px 12px;font-size:12px;color:#3c5a3f}
+.foot{color:#7a8a7c;font-size:12px;margin-top:16px}
+.hidden{display:none}
+.note{margin-top:14px;font-size:12px;color:#6b7b6d}
+</style></head><body>
+<header><div class="logo">H&amp;R</div><div><h1>Area agenti &middot; Provvigioni</h1><small>the wire man &mdash; riepilogo personale</small></div></header>
+<div class="wrap">
+ <div id="login" class="card">
+   <h2>Accedi</h2><div class="sub">Inserisci username e password che ti sono stati assegnati.</div>
+   <label for="u">Username</label><input id="u" autocomplete="username" placeholder="es. nome.cognome">
+   <label for="p">Password</label><input id="p" type="password" autocomplete="current-password" placeholder="password">
+   <button id="go">Entra</button>
+   <div id="err" class="err"></div>
+   <div class="note">I dati sono cifrati: senza la password non &egrave; possibile leggerli, nemmeno aprendo il codice della pagina.</div>
+ </div>
+ <div id="areaG" class="hidden">
+   <div class="card">
+     <div class="big"><div><div class="lbl">Totale provvigioni 2026 (gen&ndash;set)</div><div class="val" id="tot">&euro; 0,00</div></div>
+       <div class="chips"><span class="chip" id="cNome"></span><span class="chip" id="cZona"></span><span class="chip" id="cQuota"></span></div></div>
+     <table><thead><tr><th>Mese</th><th class="n">Provvigione</th></tr></thead><tbody id="rows"></tbody></table>
+     <div class="foot" id="agg"></div>
+     <button id="out" style="background:#8b9d8d;margin-top:14px;width:auto;padding:9px 16px">Esci</button>
+   </div>
+ </div>
+</div>
+<script>
+var BLOBS = {"campisi":{"salt":"qJoioC6SIE2pEimf8sqslQ==","iv":"/CxZjhBu8VGONH8o","data":"sTg9tJ3AuQubg6P//+dulAgeaPlBndGBVC080SrSFAtMGXDyH0D0/krCZ/qI41XacATJ+ukSfHbbdRtfWK1lp+79oANEHRzAcIJ+OCpTPVQV1sTmfKF4JR7s81NXsRYYcrGorNBhLblDDtrdAz6nydgSUM/bNeLwPwIH2znN8hCmQ98DDEZo76oXgKnZjZlyUdIqC/vDtDpOvB/T6WCley4RGYtz"},"convertini":{"salt":"Qx+Mkd7pDfjbYPTKKRbNtQ==","iv":"I/asvE8MHzGMJ4ps","data":"E40ngayCL96BDbCQmXkzl7EmtSuPbCLSY6cSnejFb8smcYtl9UBGj3xFA+pCPayNQ0fkFJbrxzyWg+7DeVvEwFenyWEdSIVZox05EQeCdPDBEvIl3/5TRsJNIoU7xl1GoXsYKtz9L7XPV/F1uWXwUe7M4gNn2DQTUvrlwQfMMVSzVnApA/5+M7ZBhtTyBky8ikc6icRpdb7EFSUshVyoo5mNxQP/ZCsPJ81QtDRxhM0+STo="},"nazzareno":{"salt":"okbV729yUu6W6pYkZR235g==","iv":"rqjKyj/zk5O6TpFu","data":"qt/esqy/dJV+PcjDl5YcqkFfABxXU4D9yo7Q/Rp6HsS8oV4XGcCk5b4zgqcM6Wvkc/qxnUJ3pM5/PkLhJmSd4azmoBWH1ax7GYHHGopI759EbfVqd/6ZC0uBTlCCmZWxZwUqvGV/EO5LqIjklhvUcwWmx6KXtrZtwz0Kh8Er1TjZZ1UmM2h/4ReWs+PY2h/wvCbQPVAM2nEyKvet43D1HPA+wuP3W0F+Y2xLAdQ2qbU1vmYq1nGykuJLhTE="},"natascia":{"salt":"i3ZpGolUdpi60SqGdoYEDQ==","iv":"jlSzTRF0yACSmYz5","data":"dnHRq7pHqGGe5t/3Uw+i8CytButsNOJvRT4zBjs1nGZ4HwWt0nzCBtbPwOwhRcE72I6RgW0h+PfBx+aiCo5M4ipFB0uoc7h3sx4lEDWFR64wYuAghcHg0rt/n/Mnp9KiwgV3x8PpoP/jNqR1OcfHG3zPi7bxoAocnGfW0jktNTQ6MOiNGXdrJXSWqaENQquMJwFSsug+pBg6djvPyFNx7HAcDLWE"}};
+var euro = function(n){ return '€ ' + n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}); };
+function b64(s){var b=atob(s);var a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
+async function decrypt(pw, blob){
+  var salt=b64(blob.salt), iv=b64(blob.iv), data=b64(blob.data);
+  var base=await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:salt,iterations:150000,hash:'SHA-256'}, base, {name:'AES-GCM',length:256}, false, ['decrypt']);
+  var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv}, key, data);
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+document.getElementById('go').onclick = async function(){
+  var u=document.getElementById('u').value.trim().toLowerCase();
+  var p=document.getElementById('p').value;
+  var e=document.getElementById('err'); e.textContent='';
+  var blob=BLOBS[u];
+  if(!blob){ e.textContent='Username o password non validi.'; return; }
+  try{
+    var d=await decrypt(p, blob);
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('areaG').classList.remove('hidden');
+    document.getElementById('cNome').textContent=d.nome;
+    document.getElementById('cZona').textContent=d.zona;
+    document.getElementById('cQuota').textContent='Quota '+d.quota;
+    document.getElementById('tot').textContent=euro(d.totale);
+    var tb=document.getElementById('rows'); tb.innerHTML='';
+    for(var k in d.mesi){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+k+' 2026</td><td class="n">'+euro(d.mesi[k])+'</td>'; tb.appendChild(tr); }
+    document.getElementById('agg').textContent='Aggiornato al '+d.aggiornato;
+  }catch(_){ e.textContent='Username o password non validi.'; }
+};
+document.getElementById('out').onclick=function(){document.getElementById('areaG').classList.add('hidden');document.getElementById('login').classList.remove('hidden');document.getElementById('p').value='';};
+</script>
+</body></html>
