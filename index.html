@@ -2,25 +2,31 @@
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>H&R · Area agenti</title>
 <style>
-:root{--g:#2E7D32;--g2:#43A047;--ink:#1c2b1e}
+:root{--g:#2E7D32;--g2:#43A047;--ink:#1c2b1e;--line:#e6efe6}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(160deg,#eef5ee,#dfe9df);min-height:100vh;color:var(--ink)}
-header{background:var(--g);color:#fff;padding:18px 22px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+header{background:var(--g);color:#fff;padding:16px 22px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 header .logo{width:38px;height:38px;border-radius:10px;background:#fff;color:var(--g);display:grid;place-items:center;font-weight:800;font-size:15px}
-header h1{font-size:18px;margin:0;font-weight:700}
-header small{opacity:.85;font-weight:400}
-.wrap{max-width:760px;margin:34px auto;padding:0 16px}
-.card{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(20,50,20,.12);padding:26px;border:1px solid #e3ece3}
-h2{margin:0 0 4px;font-size:20px}.sub{color:#5b6b5d;font-size:14px;margin-bottom:18px}
+header h1{font-size:18px;margin:0;font-weight:700}header small{opacity:.85;font-weight:400}
+.wrap{max-width:780px;margin:28px auto;padding:0 16px}
+.card{background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(20,50,20,.12);padding:24px;border:1px solid #e3ece3}
+h2{margin:0 0 4px;font-size:20px}.sub{color:#5b6b5d;font-size:14px;margin-bottom:16px}
 label{display:block;font-size:13px;font-weight:600;margin:12px 0 6px}
 input{width:100%;padding:12px 14px;border:1px solid #cfd9cf;border-radius:10px;font-size:15px;background:#fbfdfb}
 input:focus{outline:none;border-color:var(--g2);box-shadow:0 0 0 3px rgba(67,160,71,.15)}
-button{margin-top:18px;width:100%;padding:13px;border:0;border-radius:10px;background:var(--g);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+button{padding:10px 14px;border:0;border-radius:10px;background:var(--g);color:#fff;font-size:14px;font-weight:700;cursor:pointer}
 button:hover{background:var(--g2)}
+.btn-full{width:100%;padding:13px;font-size:15px;margin-top:18px}
+.btn-ghost{background:#eef5ee;color:#2f5a34;border:1px solid #d8e6d8}
+.btn-ghost:hover{background:#e2efe2}
+.navbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.navbar .sp{flex:1}
 .err{color:#c62828;font-size:14px;margin-top:12px;min-height:18px}
-.big{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:14px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.big{background:linear-gradient(135deg,var(--g),var(--g2));color:#fff;border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .big .lbl{font-size:13px;opacity:.9}.big .val{font-size:30px;font-weight:800}
-table.main{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
-table.main th,table.main td{padding:11px 12px;text-align:left;border-bottom:1px solid #eef2ee}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.chip{background:rgba(255,255,255,.2);border-radius:999px;padding:4px 12px;font-size:12px}
+table.main{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}
+table.main th,table.main td{padding:10px 12px;text-align:left;border-bottom:1px solid #eef2ee}
 table.main th{background:#f3f8f3;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#5b6b5d}
 .n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 tr.mese{cursor:pointer}tr.mese:hover td{background:#f7fbf7}
@@ -29,14 +35,18 @@ tr.open .caret{transform:rotate(90deg)}
 tr.det{display:none}tr.det.open{display:table-row}
 td.detcell{background:#fafdf9;padding:0}
 table.sub{width:100%;border-collapse:collapse;font-size:13px}
-table.sub th,table.sub td{padding:7px 12px;border-bottom:1px dashed #e6efe6;text-align:left}
-table.sub th{color:#6b7f6d;font-weight:600;background:transparent}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.chip{background:#eef5ee;border:1px solid #d8e6d8;border-radius:999px;padding:4px 12px;font-size:12px;color:#3c5a3f}
+table.sub th,table.sub td{padding:7px 12px;border-bottom:1px dashed var(--line);text-align:left}
+table.sub th{color:#6b7f6d;font-weight:600}
+.bar{height:8px;border-radius:6px;background:#e6f0e6;position:relative;min-width:40px}
+.bar>i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,var(--g),var(--g2))}
+.tag{font-size:11px;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.tag.ok{background:#e8f5e9;color:#2e7d32}.tag.warn{background:#fff4e5;color:#b26a00}.tag.off{background:#f2f2f2;color:#777}
+.tabs{display:flex;gap:6px;margin-bottom:14px}
+.tab{padding:8px 16px;border-radius:999px;background:#f0f6f0;color:#3c5a3f;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #e0ece0}
+.tab.active{background:var(--g);color:#fff;border-color:var(--g)}
 .foot{color:#7a8a7c;font-size:12px;margin-top:16px}
 .muted{color:#8a9a8c;font-size:12px;margin-top:10px}
-.hidden{display:none}
-.note{margin-top:14px;font-size:12px;color:#6b7b6d}
+.hidden{display:none}.note{margin-top:14px;font-size:12px;color:#6b7b6d}
 </style></head><body>
 <header><div class="logo">H&amp;R</div><div><h1>Area agenti &middot; Provvigioni</h1><small>the wire man &mdash; riepilogo personale</small></div></header>
 <div class="wrap">
@@ -44,23 +54,34 @@ table.sub th{color:#6b7f6d;font-weight:600;background:transparent}
    <h2>Accedi</h2><div class="sub">Inserisci username e password che ti sono stati assegnati.</div>
    <label for="u">Username</label><input id="u" autocomplete="username" placeholder="es. nome.cognome">
    <label for="p">Password</label><input id="p" type="password" autocomplete="current-password" placeholder="password">
-   <button id="go">Entra</button>
+   <button id="go" class="btn-full">Entra</button>
    <div id="err" class="err"></div>
    <div class="note">I dati sono cifrati: senza la password non &egrave; possibile leggerli, nemmeno aprendo il codice della pagina.</div>
  </div>
  <div id="areaG" class="hidden">
+   <div class="navbar">
+     <button id="back" class="btn-ghost hidden">&larr; Indietro</button>
+     <div class="sp"></div>
+     <button id="out" class="btn-ghost">Esci</button>
+   </div>
    <div class="card">
      <div class="big"><div><div class="lbl">Totale provvigioni 2026 (gen&ndash;set)</div><div class="val" id="tot">&euro; 0,00</div></div>
        <div class="chips"><span class="chip" id="cNome"></span><span class="chip" id="cZona"></span><span class="chip" id="cQuota"></span></div></div>
-     <table class="main"><thead><tr><th>Mese</th><th class="n">Provvigione</th></tr></thead><tbody id="rows"></tbody></table>
-     <div class="muted">Clicca sul mese per vedere i clienti e gli importi degli ordini.</div>
+     <div class="tabs"><div id="tProv" class="tab active">Provvigioni</div><div id="tCli" class="tab">Clienti</div></div>
+     <div id="paneProv">
+       <table class="main"><thead><tr><th>Mese</th><th class="n">Provvigione</th><th style="width:34%"></th></tr></thead><tbody id="rows"></tbody></table>
+       <div class="muted">Clicca sul mese per vedere i clienti e gli importi degli ordini.</div>
+     </div>
+     <div id="paneCli" class="hidden">
+       <table class="main"><thead><tr><th>Cliente</th><th>Citt&agrave;</th><th>Ultimo ordine</th><th class="n">2026</th><th class="n">2025</th></tr></thead><tbody id="clirows"></tbody></table>
+       <div class="muted" id="clifoot"></div>
+     </div>
      <div class="foot" id="agg"></div>
-     <button id="out" style="background:#8b9d8d;margin-top:14px;width:auto;padding:9px 16px">Esci</button>
    </div>
  </div>
 </div>
 <script>
-var BLOBS = {"convertini":{"salt":"+PvektLM7WlKgiO8+AFptA==","iv":"mDmvy6RSJQPJHumD","data":"Z+GXjki1bkVQ+aXMgskgusneNyEdkF01mg1exApdvXa7pvzYMVPwCMh1bH1c5N4IOXK0mwI/66NcP3KzCtlol3NsHdv8E3D8vPijmsAbO4KhCgUDOAwu18r75EU/Y52/wstosWHmOb/NKPvvdrh5IzJarhcVyMYaJkYW1pANfy0AUQ3p/yffmQXOtrO32aMV2kUbhZrUXWl8FDfk4S3kYIloxWU2mHHj3GIpNoTFN3dZNB6QfresP/HmF62inmlFu30cctIYd6G21FPaEzONK5OJzYo7f0jxtuma4qef0Tzi4CzgJ2oLyGN/WBR+S8q65MQ22Kkv4FPsQ7Pk5l5MmC8VldR991SkHkEF0uUsgXfbyumLBySpG+x61tkWAnDbJyiMxnUa0iSwWINC1pBeEFf0CQT00BpJYwoqyvSUCgYcKOUc5Rg3FQ9ejTy2sq2gLYsgnS686dft+mU1c8v1l7/QyhgpKra5sV45mkxhBf+oNnfiFKPAWM1CWK0xxrZMMpLrDO8GxZAx2YheHOF1q1rFz3ZfaroF4DWSWBXteuwNCNTkSIe1rF+xZAAaXYYPOyA6PzOJZR7ufV430c4nb08UeEPix3LluzegfjSQMCEVcnwEBotgXddr1zvB9rgUvguFaVSNgwTyrP0Gq1BoNGBdlCeTcuYHVSYeMsi1JBDfXc2bW2iR/WmFH6aJDaePFpsQGYvFLVIloaM="},"nazzareno":{"salt":"Z4UKddfvgbgdmicFfFhjsw==","iv":"FyuD09ORCk5qlDvI","data":"d3VHFELDZ7UPBpbV3alVqavsdt01uVHr4oYd8kgrf9qhmcGbdGjXMtrdjkP+b1eqdYihxjGquVXsMkh19oxORDLeD2OcUYlX2QNccCEHFEpB4Qut47PlFewSQLXI+UKy+jBJ9ggqjipz2lnDfAMqIat4J3FDARBf7ZWvyw4UHiJfuyLQfxUSLWRurAO7mzQdZnWf8fw7bYdQVbejsK+fx1PCEHuzLD8MPZxGTxplRWcF1SSCFXegSnAqWpmHtnW2VpNsZ6bZCkpqsaQuVgqy+ZaikOT7AKNWptBn6klAa8DDswzRyfLsAJF6gMhlUyewlatFF9KfALwjldOvTOhpz2ntHK+AqpzpwQ+p15ASGyrSjRjF5+Uh9+2s4DrAFXOLIjnuDjrAw5Lx7Vt8DNdhDiR4Je9Y/Nk+iyQ0kyR6+sOP6A+xbHVu6vMcsD+DylPVu8LFt0B2H5s3aMSkZC0sELHjMaQaOHrz4ul8C+3MKfQHVuqk+V4BzI3fIrg1OoZI6fn8O0Ufd9VUgXx+v4I5GulX9sH76f+Ndf252ktwiZjcVsK+Vt6KHyon+x7/ERHpLrvdE1FZcZsn9H+CbRhCdldvEcn5xW4NI9uAYrT/qOe2nPxRoX884x10XKl7Ola1O3UoLxVau2yf8LWeXvtVshSCI+34uBlq25qRtUP6RpFJVcG/YcwR8BSrRkwqZxg="},"natascia":{"salt":"DgLOFuauF5gmHc0LRHulhA==","iv":"FBBcimgy8UfCDQdM","data":"FD/GBnoAPGZNAZKBQxVj2sx+zWL5Zl4eynCxWLBFpsSA81hdih2s8c/AqJbwYbLSkhhvqMFTpF0Dtr8lkGbnh3NnZ2lxIvtR061C/LqQjEmEVuZBkIKhl3nKTS6scE728Q9abj0QIMQyTtsIsCIaG+PlMgFSFlt2HNF+LnJ0HIAWrysjoRXnV7EeN49FHc00tPF1mBF8hGZ5BZNPMZgJCWqZ30ptPJ5KzjBm5pBzSNLeq/Vq3kE1/jUIacHByup7tp80o9/nejJ7enrONunFzAv4wEGoUyQjio+qyyb0zJSF8vB5Fv0e03Kx13qOjO8fwPCGJuV5bkTF2uFUrLcFgO+6sXynWk/ssQtXbg/J4+bGQONy2jtfDt/dBdKMBcTruTPxOTDKmbbOTvoitt33gw4IAfKAxWs2czhGYUyC2VxUjencAh727Y47jEJ7AppzzGQ1aJo0hVBaBPPkMQ=="}};
+var BLOBS = {"convertini":{"salt":"FdiT7DLiZ5He5I7KU4vgjw==","iv":"i/sYJzGSQWTfwViK","data":"9oXs8buQEQY9kVQ4XU/fDuvuGvLN+LS2jDUN+rPWG+ZtucAXrs5VM6PDJKIEkClxt5LEf2B7LAnzDMypOcQiFQteSoR9kWbpi5WQqHtXrsWdJhCYYGxutCKOjNqLWboInhnebS7VP+Huojk5eWalJDFSsorBBg9MUvIF3mS0yTgNLasxphG+gNADaXtgEjHGESyWGOLxql0qYAGeG2Hvm4Ipi533D/4DO41PZA089c07kGcaU2afy1PCLrDIeQQ+lwkXzjavfd/Vgb1yPZZqXiiy9ZZ9cTo8GvRt3cXE7Y8tYUgCPBAxHN9dVZfCiFRZbRx4cPay6+kmpRanqhDgEOkFHQAev0zxEn3r62akPSQ5Tpl2bKWnl92Zx5RuE5BdGGKmqNe8lLcZlDos0oHhQt6swYXmQeWG5KjMjfW6QVsTdRckhHyJiWAfBoqD6WJmoA761mxOlOmafT+b0fIOKt5ISrgRfCyhJkaTGRIKZe3cAgIl1wkLQr5UOiDQsF34xyGpKdbd8JQjpTEEY3ZeI8KXb4UbOklX8zWb7B385Kx5hCJQpU12sXA7dWJJ7ZWbUV4TGPTjjMqx778MYzTnpVTMDGFZd0EJkWo4ZlU/PXPh1Q4SATMXeJiArPpyel9YgqSQNgE+H7WT4XCjpbg6Dl9pz571PgdVOnFVzV2aYr8YNkvdbRA68kPalRzhuLVVB5a9Z/eVdR6OCFw="},"nazzareno":{"salt":"aXzv8AvDNjODd7QNwj1bYw==","iv":"TCSgIFo45he3qwoY","data":"/1DKW7EQL6BPB3/yVNa3bCGCcxAJwURs6Wa1L4n+5AEtuNmcOHLrHHBck5ZzRVdkM3Kia79MiVMJn4W43XIYYn6pITr/mYumqMF/k05NpYl872T9aVEmXR4xZDKn/g80i0+Q72YXp1a5AiPisx1ehpKNJIusUy4WEfb7Y2xy3cgMNYOqDod8cYpSyjxvtIhJKs4+nIBm0LuCTlfO8qWguenCQDCt1mdtnDQ2f2KpCqvqs6b3PLe4QxK2rMuVgNVxdo2jOysvNHS7/ul6uaGsJCsOZXOgReKF4+KQN4raMMl5w2pgT5DqHIqwCNkSHmhLOUY0xZn0mY8pRknkxkAgVpyfJgYQ6pYZ0FVYPULNDBzbDbpAGGnikGkBy5tRpTFny65Nr0x6p2Rv9n7WJaWQHFB1EuJfRl1pCgVPHGruwULRD3+ztbzprTL1ZuTcaYQO5Vqeu6QGfJGlunw4pDxOF4jE2AiKfw6EJ5IqyAohE8TECqNqCshP6QVOtishOG+fwxsUuP9csMhTe0Wt5m0gDydFskw9qcneyglaC/fbRp0jOpXeukj/rDSIWsqg+sKpexlh0kN3/2r9VzrwtdmMvyZK+D5Q/q6yeNJzFDXLcAIUP0S1IWsZJ/yjNE19wWXAXzawXNkchfRk4RPuBj/S0XT4vO6f8wSDsQWuKmpAgsp/msz99ejbOTFDFPul4JA="},"natascia":{"salt":"c6xTKhptlalLQxuL33xH1A==","iv":"oasN8NRFjhdhr3BM","data":"HIYCSEz5g+fzH9r2r9NIaQxlcZaX/psvbP7UOWi/5R4DU6lFQnjZGYVKWEQp+iYpPxs1h5METhVaK/On6+mQSMsOo/mWRWB3cOUsPyLh/Qa0gjbEcfIh119AAsKYTmHsz3gV55JeWLGcGwOx3F+dPWPc1u+aG6nZgPuFy7+YPABZvd6dXsQUMD69UJMVhhERC3s166jteajIDTpwb9x8xKinICZQFhu0um9FZKJ0TXUNLhrZKUk/dSUL8QkionFDyaQ7potGZrc7NyMQQVE4JuHqYQ+R3V5mvPtWyHeJxwidVFsSwMNeepHhpGsE+I21wDOJI3Kqmn8HQgo/UXHa34O8Ob8JY5ClNpwFBUv4XeYeoqbkR3oNSPjxrhO6HaSRHKvux9VEuyVlEPWB59nDF6vUuj+6N8U8LXN7yzexQ+09Hj0qOwpXnuO4aEyNwz/lKk3VGFJ36l8Gap9HNA=="}};
 var euro = function(n){ return '€ ' + n.toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}); };
 function b64(s){var b=atob(s);var a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
 async function decrypt(pw, blob){
@@ -70,12 +91,54 @@ async function decrypt(pw, blob){
   var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv}, key, data);
   return JSON.parse(new TextDecoder().decode(pt));
 }
+var STATE={open:null, tab:'prov'};
+function showTab(t){
+  STATE.tab=t;
+  document.getElementById('tProv').classList.toggle('active', t==='prov');
+  document.getElementById('tCli').classList.toggle('active', t==='cli');
+  document.getElementById('paneProv').classList.toggle('hidden', t!=='prov');
+  document.getElementById('paneCli').classList.toggle('hidden', t!=='cli');
+  document.getElementById('back').classList.toggle('hidden', !(t==='cli' || STATE.open));
+}
+function renderProv(d){
+  var tb=document.getElementById('rows'); tb.innerHTML='';
+  var vals=[]; for(var k in d.mesi) vals.push(d.mesi[k].tot);
+  var mx=Math.max.apply(null, vals.concat([1]));
+  var order=['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
+  order.forEach(function(k){
+    if(!d.mesi[k]) return; var ms=d.mesi[k];
+    var tr=document.createElement('tr'); tr.className='mese';
+    var w=Math.max(3, Math.round(Math.abs(ms.tot)/mx*100));
+    tr.innerHTML='<td><span class="caret">▸</span> '+k+' 2026</td><td class="n">'+euro(ms.tot)+'</td><td><div class="bar"><i style="width:'+w+'%"></i></div></td>';
+    var dr=document.createElement('tr'); dr.className='det';
+    var inner='<table class="sub"><thead><tr><th>Cliente</th><th class="n">Importo ordine</th><th class="n">Provvigione</th></tr></thead><tbody>';
+    ms.voci.forEach(function(v){ inner+='<tr><td>'+v[0]+'</td><td class="n">'+euro(v[1])+'</td><td class="n">'+euro(v[1]*d.rate)+'</td></tr>'; });
+    inner+='</tbody></table>';
+    dr.innerHTML='<td class="detcell" colspan="3">'+inner+'</td>';
+    (function(tr,dr,k){ tr.onclick=function(){ var o=!dr.classList.contains('open'); tr.classList.toggle('open',o); dr.classList.toggle('open',o); STATE.open=o?k:null; document.getElementById('back').classList.toggle('hidden', !(STATE.tab==='cli'||STATE.open)); }; })(tr,dr,k);
+    tb.appendChild(tr); tb.appendChild(dr);
+  });
+}
+function renderCli(d){
+  var tb=document.getElementById('clirows'); tb.innerHTML='';
+  var cs=(d.clienti||[]).slice();
+  cs.sort(function(a,b){ return (b.tot26-a.tot26) || (b.tot25-a.tot25); });
+  var attivi=0, fermi=0;
+  cs.forEach(function(c){
+    var stato, citta=c.citta||'';
+    if(c.ultimo){ stato='<span class="tag ok">attivo · '+c.ultimo+'</span>'; attivi++; }
+    else if(c.tot25>0){ stato='<span class="tag warn">fermo (2025)</span>'; fermi++; }
+    else { stato='<span class="tag off">mai ordinato</span>'; }
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+c.nome+'</td><td>'+citta+'</td><td>'+stato+'</td><td class="n">'+(c.tot26?euro(c.tot26):'—')+'</td><td class="n">'+(c.tot25?euro(c.tot25):'—')+'</td>';
+    tb.appendChild(tr);
+  });
+  document.getElementById('clifoot').textContent='Clienti in zona: '+cs.length+' · attivi 2026: '+attivi+' · fermi da 2025: '+fermi;
+}
 document.getElementById('go').onclick = async function(){
-  var u=document.getElementById('u').value.trim().toLowerCase();
-  var p=document.getElementById('p').value;
+  var u=document.getElementById('u').value.trim().toLowerCase(), p=document.getElementById('p').value;
   var e=document.getElementById('err'); e.textContent='';
-  var blob=BLOBS[u];
-  if(!blob){ e.textContent='Username o password non validi.'; return; }
+  var blob=BLOBS[u]; if(!blob){ e.textContent='Username o password non validi.'; return; }
   try{
     var d=await decrypt(p, blob);
     document.getElementById('login').classList.add('hidden');
@@ -84,21 +147,15 @@ document.getElementById('go').onclick = async function(){
     document.getElementById('cZona').textContent=d.zona;
     document.getElementById('cQuota').textContent='Quota '+d.quota;
     document.getElementById('tot').textContent=euro(d.totale);
-    var tb=document.getElementById('rows'); tb.innerHTML='';
-    for(var k in d.mesi){
-      var ms=d.mesi[k];
-      var tr=document.createElement('tr'); tr.className='mese';
-      tr.innerHTML='<td><span class="caret">▸</span> '+k+' 2026</td><td class="n">'+euro(ms.tot)+'</td>';
-      var dr=document.createElement('tr'); dr.className='det';
-      var inner='<table class="sub"><thead><tr><th>Cliente</th><th class="n">Importo ordine</th><th class="n">Provvigione</th></tr></thead><tbody>';
-      ms.voci.forEach(function(v){ inner+='<tr><td>'+v[0]+'</td><td class="n">'+euro(v[1])+'</td><td class="n">'+euro(v[1]*d.rate)+'</td></tr>'; });
-      inner+='</tbody></table>';
-      dr.innerHTML='<td class="detcell" colspan="2">'+inner+'</td>';
-      (function(tr,dr){ tr.onclick=function(){ tr.classList.toggle('open'); dr.classList.toggle('open'); }; })(tr,dr);
-      tb.appendChild(tr); tb.appendChild(dr);
-    }
+    renderProv(d); renderCli(d); showTab('prov');
     document.getElementById('agg').textContent='Aggiornato al '+d.aggiornato;
-  }catch(_){ e.textContent='Username o password non valide.'; }
+  }catch(_){ e.textContent='Username o password non validi.'; }
+};
+document.getElementById('tProv').onclick=function(){ showTab('prov'); };
+document.getElementById('tCli').onclick=function(){ showTab('cli'); };
+document.getElementById('back').onclick=function(){
+  if(STATE.open){ var rows=document.querySelectorAll('tr.mese'); for(var i=0;i<rows.length;i++){ rows[i].classList.remove('open'); } var ds=document.querySelectorAll('tr.det'); for(var j=0;j<ds.length;j++){ ds[j].classList.remove('open'); } STATE.open=null; }
+  showTab('prov');
 };
 document.getElementById('out').onclick=function(){document.getElementById('areaG').classList.add('hidden');document.getElementById('login').classList.remove('hidden');document.getElementById('p').value='';};
 </script>
